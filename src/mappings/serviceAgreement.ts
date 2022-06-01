@@ -1,18 +1,18 @@
-// Copyright 2020-2021 OnFinality Limited authors & contributors
+// Copyright 2020-2022 SubQuery Pte Ltd authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import assert from 'assert';
-import { ServiceAgreementCreatedEvent } from '@subql/contract-sdk/typechain/ServiceAgreementRegistry';
+import { ClosedAgreementCreatedEvent } from '@subql/contract-sdk/typechain/ServiceAgreementRegistry';
 import { ServiceAgreement } from '../types';
 import { bytesToIpfsCid } from './utils';
 import { IServiceAgreement__factory } from '@subql/contract-sdk';
 import FrontierEthProvider from './ethProvider';
-import { FrontierEvmEvent } from '@subql/contract-processors/dist/frontierEvm';
+import { AcalaEvmEvent } from '@subql/acala-evm-processor';
 
 export async function handleServiceAgreementCreated(
-  event: FrontierEvmEvent<ServiceAgreementCreatedEvent['args']>
+  event: AcalaEvmEvent<ClosedAgreementCreatedEvent['args']>
 ): Promise<void> {
-  logger.info('handleServiceAgreementCreated');
+  logger.info('handleClosedServiceAgreementCreated');
   assert(event.args, 'No event args');
 
   const saContract = IServiceAgreement__factory.connect(

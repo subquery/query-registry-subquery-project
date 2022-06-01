@@ -1,3 +1,6 @@
+// Copyright 2020-2022 SubQuery Pte Ltd authors & contributors
+// SPDX-License-Identifier: Apache-2.0
+
 import { PlanManager__factory } from '@subql/contract-sdk';
 import {
   PlanCreatedEvent,
@@ -11,7 +14,7 @@ import { Plan, PlanTemplate } from '../types';
 import FrontierEthProvider from './ethProvider';
 import { bytesToIpfsCid, PLAN_MANAGER_ADDRESS } from './utils';
 import { constants } from 'ethers';
-import { FrontierEvmEvent } from '@subql/contract-processors/dist/frontierEvm';
+import { AcalaEvmEvent } from '@subql/acala-evm-processor';
 import { BigNumber } from '@ethersproject/bignumber';
 
 function getPlanId(indexer: string, idx: BigNumber): string {
@@ -19,7 +22,7 @@ function getPlanId(indexer: string, idx: BigNumber): string {
 }
 
 export async function handlePlanTemplateCreated(
-  event: FrontierEvmEvent<PlanTemplateCreatedEvent['args']>
+  event: AcalaEvmEvent<PlanTemplateCreatedEvent['args']>
 ): Promise<void> {
   logger.info('handlePlanTemplateCreated');
   assert(event.args, 'No event args');
@@ -49,7 +52,7 @@ export async function handlePlanTemplateCreated(
 }
 
 export async function handlePlanTemplateMetadataUpdated(
-  event: FrontierEvmEvent<PlanTemplateMetadataChangedEvent['args']>
+  event: AcalaEvmEvent<PlanTemplateMetadataChangedEvent['args']>
 ): Promise<void> {
   logger.info('handlePlanTemplateMetadataUpdated');
   assert(event.args, 'No event args');
@@ -64,7 +67,7 @@ export async function handlePlanTemplateMetadataUpdated(
 }
 
 export async function handlePlanTemplateStatusUpdated(
-  event: FrontierEvmEvent<PlanTemplateStatusChangedEvent['args']>
+  event: AcalaEvmEvent<PlanTemplateStatusChangedEvent['args']>
 ): Promise<void> {
   logger.info('handlePlanTemplateStatusUpdated');
   assert(event.args, 'No event args');
@@ -79,7 +82,7 @@ export async function handlePlanTemplateStatusUpdated(
 }
 
 export async function handlePlanCreated(
-  event: FrontierEvmEvent<PlanCreatedEvent['args']>
+  event: AcalaEvmEvent<PlanCreatedEvent['args']>
 ): Promise<void> {
   logger.info('handlePlanCreated');
   assert(event.args, 'No event args');
@@ -100,7 +103,7 @@ export async function handlePlanCreated(
 }
 
 export async function handlePlanRemoved(
-  event: FrontierEvmEvent<PlanRemovedEvent['args']>
+  event: AcalaEvmEvent<PlanRemovedEvent['args']>
 ): Promise<void> {
   logger.info('handlePlanRemoved');
   assert(event.args, 'No event args');

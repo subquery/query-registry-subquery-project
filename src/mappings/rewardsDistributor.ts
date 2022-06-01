@@ -1,4 +1,4 @@
-// Copyright 2020-2021 OnFinality Limited authors & contributors
+// Copyright 2020-2022 SubQuery Pte Ltd authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import assert from 'assert';
@@ -17,7 +17,7 @@ import {
   RewardsChangedEvent,
 } from '@subql/contract-sdk/typechain/RewardsDistributer';
 import { REWARD_DIST_ADDRESS } from './utils';
-import { FrontierEvmEvent } from '@subql/contract-processors/dist/frontierEvm';
+import { AcalaEvmEvent } from '@subql/acala-evm-processor';
 import { BigNumber } from '@ethersproject/bignumber';
 
 function buildRewardId(indexer: string, delegator: string): string {
@@ -33,7 +33,7 @@ function getPrevIndexerRewardId(indexer: string, eraIdx: BigNumber): string {
 }
 
 export async function handleRewardsDistributed(
-  event: FrontierEvmEvent<DistributeRewardsEvent['args']>
+  event: AcalaEvmEvent<DistributeRewardsEvent['args']>
 ): Promise<void> {
   logger.info('handleRewardsDistributed');
   assert(event.args, 'No event args');
@@ -74,7 +74,7 @@ export async function handleRewardsDistributed(
 }
 
 export async function handleRewardsClaimed(
-  event: FrontierEvmEvent<ClaimRewardsEvent['args']>
+  event: AcalaEvmEvent<ClaimRewardsEvent['args']>
 ): Promise<void> {
   logger.info('handleRewardsClaimed');
   assert(event.args, 'No event args');
@@ -107,7 +107,7 @@ export async function handleRewardsClaimed(
 }
 
 export async function handleRewardsUpdated(
-  event: FrontierEvmEvent<RewardsChangedEvent['args']>
+  event: AcalaEvmEvent<RewardsChangedEvent['args']>
 ): Promise<void> {
   logger.info('handleRewardsUpdated');
   assert(event.args, 'No event args');
